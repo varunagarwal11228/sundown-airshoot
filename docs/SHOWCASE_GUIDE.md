@@ -2,14 +2,14 @@
 
 ## The night before
 
-- [ ] Copy the whole `sundown-airshoot` folder to a USB drive as a backup.
-- [ ] Double-click **Sundown Airshoot** on the Desktop and play one full level, boss included.
-- [ ] Settings: set **Difficulty** to **Easy** for visitors. Most people at an event have never played it and should get to see the boss.
-- [ ] Settings: if the laptop has no graphics card or feels slow, set **Graphics** to **Low**. (The game also lowers its resolution by itself if it detects a low frame rate.)
-- [ ] Settings: click **Reset high scores** twice (the second click confirms) so visitors start with a fresh leaderboard.
-- [ ] Charge the laptop. Plug it in at the event; laptops slow down a lot on battery saver.
-- [ ] Bring a mouse. If you have a gamepad (Xbox/PS), bring it too; it just works.
-- [ ] Bring headphones or a small speaker. The music is half the show.
+1. Copy the whole `sundown-airshoot` folder to a USB drive as a backup.
+2. Double-click **Sundown Airshoot** on the Desktop and play one full level, boss included.
+3. Settings: set **Difficulty** to **Easy** for visitors. Most people at an event have never played it and should get to see the boss.
+4. Settings: if the laptop has no graphics card or feels slow, set **Graphics** to **Low**. (The game also lowers its resolution by itself if it detects a low frame rate.)
+5. Settings: click **Reset high scores** twice (the second click confirms) so visitors start with a fresh leaderboard.
+6. Charge the laptop. Plug it in at the event; laptops slow down a lot on battery saver.
+7. Bring a mouse. If you have a gamepad (Xbox/PS), bring it too; it just works.
+8. Bring headphones or a small speaker. The music is half the show.
 
 ## At the table
 

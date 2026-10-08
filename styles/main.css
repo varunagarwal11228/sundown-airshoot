@@ -452,9 +452,8 @@ kbd {
   font-weight: 500;
   font-size: 17px;
   color: var(--ink);
-  background: rgba(11, 4, 24, 0.75);
-  border-left: 3px solid var(--cyan);
-  border-radius: 0 4px 4px 0;
+  background: rgba(11, 4, 24, 0.8);
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
   opacity: 0;
   white-space: nowrap;
   transition: opacity 0.35s, transform 0.5s var(--ease-out);

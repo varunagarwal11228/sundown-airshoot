@@ -157,6 +157,10 @@ A few details worth knowing:
 - Change difficulty, speeds and colours in `src/config.js`.
 - After editing, run `python tools/build.py` (or `npm run build`) to rebuild the offline file.
 
+## Privacy
+
+The game collects nothing. There are no accounts, analytics, cookies, ads or network requests while you play. Settings and the high-score table are saved only in your own browser (localStorage) and never leave your computer. Clearing your browser data, or Settings > Reset high scores, removes them.
+
 ## Credits
 
 Design, code and audio by Varun Agarwal. Uses three.js (MIT licence) and the fonts Kanit, Barlow, Barlow Condensed and Mr Dafoe (SIL Open Font Licence). See `LICENSE`.
