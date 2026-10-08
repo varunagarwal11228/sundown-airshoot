@@ -6,6 +6,8 @@ A 3D arcade shooter that runs in the browser. You fly a small interceptor down a
 
 **Version 2.1** · made by Varun Agarwal for the JSS University game dev showcase.
 
+**[Play it in your browser](https://varunagarwal11228.github.io/sundown-airshoot/)** (Edge or Chrome on a laptop/desktop)
+
 ## Screenshots
 
 | | |

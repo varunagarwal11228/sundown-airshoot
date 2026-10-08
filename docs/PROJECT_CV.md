@@ -8,6 +8,9 @@ Copy whichever parts fit your CV. The short version suits a one-page resume; the
 
 **Sundown Airshoot | 3D Arcade Shooter Game (Three.js, WebGL, Web Audio)**
 
+**Live demo:** https://varunagarwal11228.github.io/sundown-airshoot/  
+**Code:** https://github.com/varunagarwal11228/sundown-airshoot
+
 ## Tech stack (one line)
 
 JavaScript (ES Modules), Three.js, WebGL2, GLSL shaders, Web Audio API, HTML5, CSS3, Gamepad API, Python (build tooling)
