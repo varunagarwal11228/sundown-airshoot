@@ -1,0 +1,39 @@
+{
+  "name": "sundown-airshoot",
+  "version": "2.1.0",
+  "description": "A synthwave 3D arcade shooter built with Three.js. Procedural music, custom GLSL shaders, runs offline from a single file.",
+  "author": "Varun Agarwal",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "build": "python tools/build.py",
+    "icons": "python tools/make_icon.py"
+  },
+  "keywords": [
+    "game",
+    "gamedev",
+    "shooter",
+    "arcade",
+    "synthwave",
+    "threejs",
+    "webgl",
+    "glsl",
+    "web-audio",
+    "procedural-generation"
+  ],
+  "dependencies": {
+    "three": "0.186.1"
+  },
+  "vendored": {
+    "three": "vendor/three (only the files the game imports, so no npm install is needed)"
+  },
+  "fonts": {
+    "Kanit": "SIL Open Font License",
+    "Mr Dafoe": "SIL Open Font License",
+    "Barlow": "SIL Open Font License",
+    "Barlow Condensed": "SIL Open Font License"
+  }
+}

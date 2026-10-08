@@ -1,0 +1,18 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Node (not needed, but just in case someone runs npm install)
+node_modules/
+
+# Windows shortcuts contain absolute paths to this machine
+*.lnk
+
+# Python
+__pycache__/
+*.pyc
+
+*.log

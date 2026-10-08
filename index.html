@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="theme-color" content="#0b0418">
+  <title>Sundown Airshoot</title>
+  <meta name="description" content="Sundown Airshoot: a synthwave 3D arcade shooter.">
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles/main.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/three.module.js",
+        "three/addons/": "./vendor/three/addons/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="scene" aria-label="Game view"></canvas>
+
+  <!-- LOADER -->
+  <section id="loader" class="screen is-active">
+    <canvas id="fluid"></canvas>
+    <div class="loader-core">
+      <div class="wordmark small">
+        <span class="wm-main">Sundown</span>
+        <span class="wm-sub">Airshoot</span>
+      </div>
+      <div class="progress"><i id="progress-fill"></i></div>
+      <div class="progress-meta"><span id="progress-label" data-t="loader.cold">Loading</span><span id="progress-pct">0%</span></div>
+      <button class="engage" id="engage" type="button" hidden data-t="loader.engage">Click or press any key to start</button>
+    </div>
+    <p class="loader-hint" data-t="loader.hint">Move your mouse to swirl the colours</p>
+  </section>
+
+  <!-- MAIN MENU -->
+  <section id="menu" class="screen">
+    <header class="logo">
+      <h1 class="wordmark">
+        <span class="wm-main">Sundown</span>
+        <span class="wm-sub">Airshoot</span>
+      </h1>
+      <p class="logo-by" id="menu-by"></p>
+    </header>
+
+    <nav class="menu-list" id="menu-list" aria-label="Main menu">
+      <button type="button" data-action="start"><span class="lbl" data-t="menu.play">Play</span></button>
+      <button type="button" data-action="howto"><span class="lbl" data-t="menu.howto">How to Play</span></button>
+      <button type="button" data-action="scores"><span class="lbl" data-t="menu.scores">High Scores</span></button>
+      <button type="button" data-action="settings"><span class="lbl" data-t="menu.settings">Settings</span></button>
+      <button type="button" data-action="credits"><span class="lbl" data-t="menu.credits">Credits</span></button>
+    </nav>
+
+    <aside class="menu-meta">
+      <div><small data-t="menu.best">Best score</small><b id="menu-best">0</b></div>
+      <div><small data-t="menu.version">Version</small><b id="menu-build">v2.0</b></div>
+    </aside>
+
+    <footer class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span data-t="ticker.1"></span>
+        <span data-t="ticker.2"></span>
+        <span data-t="ticker.3"></span>
+        <span data-t="ticker.4"></span>
+        <span data-t="ticker.5"></span>
+      </div>
+    </footer>
+  </section>
+
+  <!-- HOW TO PLAY -->
+  <section id="howto" class="screen panel" data-back="menu">
+    <div class="panel-box">
+      <header class="panel-head"><h2 data-t="howto.title">How to Play</h2></header>
+      <div class="manual">
+        <div class="keys">
+          <div><kbd>Mouse</kbd> or <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span data-t="howto.move"></span></div>
+          <div><kbd>Left click</kbd> / <kbd>Space</kbd><span data-t="howto.fire"></span></div>
+          <div><kbd>Shift</kbd> / <kbd>Right click</kbd><span data-t="howto.dash"></span></div>
+          <div><kbd>E</kbd> / <kbd>Q</kbd><span data-t="howto.emp"></span></div>
+          <div><kbd>R</kbd> / <kbd>Middle click</kbd><span data-t="howto.od"></span></div>
+          <div><kbd>Esc</kbd> / <kbd>P</kbd><span data-t="howto.pause"></span></div>
+          <div><kbd>F</kbd><span data-t="howto.fullscreen"></span></div>
+          <div><kbd>Gamepad</kbd><span data-t="howto.pad"></span></div>
+        </div>
+        <div class="intel">
+          <h3 data-t="howto.enemies"></h3>
+          <ul class="contacts">
+            <li><i class="c-mote"></i><b>Mote</b><span data-t="howto.mote"></span></li>
+            <li><i class="c-lancer"></i><b>Lancer</b><span data-t="howto.lancer"></span></li>
+            <li><i class="c-hornet"></i><b>Hornet</b><span data-t="howto.hornet"></span></li>
+            <li><i class="c-warden"></i><b>Warden</b><span data-t="howto.warden"></span></li>
+            <li><i class="c-splitter"></i><b>Splitter</b><span data-t="howto.splitter"></span></li>
+            <li><i class="c-boss"></i><b>Helios</b><span data-t="howto.boss"></span></li>
+          </ul>
+          <h3 data-t="howto.scoring"></h3>
+          <p data-t="howto.scoringText"></p>
+        </div>
+      </div>
+      <footer class="panel-foot"><button type="button" class="ghost" data-action="back"><span data-t="common.back">Back</span> <kbd>Esc</kbd></button></footer>
+    </div>
+  </section>
+
+  <!-- HIGH SCORES -->
+  <section id="scores" class="screen panel" data-back="menu">
+    <div class="panel-box">
+      <header class="panel-head"><h2 data-t="scores.title">High Scores</h2></header>
+      <ol class="board" id="board"></ol>
+      <footer class="panel-foot"><button type="button" class="ghost" data-action="back"><span data-t="common.back">Back</span> <kbd>Esc</kbd></button></footer>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section id="settings" class="screen panel" data-back="menu">
+    <div class="panel-box">
+      <header class="panel-head"><h2 data-t="settings.title">Settings</h2></header>
+      <form class="settings" id="settings-form" onsubmit="return false">
+        <label><span data-t="settings.music"></span><input type="range" name="music" min="0" max="1" step="0.05"><output></output></label>
+        <label><span data-t="settings.sfx"></span><input type="range" name="sfx" min="0" max="1" step="0.05"><output></output></label>
+        <label><span data-t="settings.difficulty"></span>
+          <select name="difficulty">
+            <option value="easy" data-t="settings.easy"></option>
+            <option value="normal" data-t="settings.normal"></option>
+            <option value="hard" data-t="settings.hard"></option>
+          </select>
+        </label>
+        <label><span data-t="settings.dim"></span>
+          <select name="playDim">
+            <option value="0.4" data-t="settings.dimLow"></option>
+            <option value="0.7" data-t="settings.dimMid"></option>
+            <option value="1" data-t="settings.dimFull"></option>
+          </select>
+        </label>
+        <label><span data-t="settings.graphics"></span>
+          <select name="quality">
+            <option value="high" data-t="settings.high"></option>
+            <option value="low" data-t="settings.low"></option>
+          </select>
+        </label>
+        <label><span data-t="settings.textStyle"></span>
+          <select name="textStyle">
+            <option value="simple" data-t="settings.simple"></option>
+            <option value="story" data-t="settings.story"></option>
+          </select>
+        </label>
+        <label><span data-t="settings.textSize"></span>
+          <select name="textSize">
+            <option value="1" data-t="settings.normal"></option>
+            <option value="1.15" data-t="settings.large"></option>
+            <option value="1.3" data-t="settings.xlarge"></option>
+          </select>
+        </label>
+        <label class="toggle"><span data-t="settings.hints"></span><input type="checkbox" name="hints"><i class="switch"></i></label>
+        <label class="toggle"><span data-t="settings.shake"></span><input type="checkbox" name="shake"><i class="switch"></i></label>
+        <label class="toggle"><span data-t="settings.fps"></span><input type="checkbox" name="fps"><i class="switch"></i></label>
+      </form>
+      <footer class="panel-foot">
+        <button type="button" class="ghost" data-action="reset-scores"><span data-t="settings.reset">Reset high scores</span></button>
+        <button type="button" class="ghost" data-action="back"><span data-t="common.back">Back</span> <kbd>Esc</kbd></button>
+      </footer>
+    </div>
+  </section>
+
+  <!-- CREDITS -->
+  <section id="credits" class="screen panel" data-back="menu">
+    <div class="panel-box">
+      <header class="panel-head"><h2 data-t="credits.title">Credits</h2></header>
+      <dl class="credits">
+        <dt data-t="credits.made"></dt><dd id="credit-author"></dd>
+        <dt data-t="credits.render"></dt><dd data-t="credits.renderText"></dd>
+        <dt data-t="credits.music"></dt><dd data-t="credits.musicText"></dd>
+        <dt data-t="credits.type"></dt><dd>Kanit, Mr Dafoe, Barlow, Barlow Condensed (SIL Open Font Licence)</dd>
+        <dt data-t="credits.for"></dt><dd data-t="credits.forText"></dd>
+      </dl>
+      <footer class="panel-foot"><button type="button" class="ghost" data-action="back"><span data-t="common.back">Back</span> <kbd>Esc</kbd></button></footer>
+    </div>
+  </section>
+
+  <!-- HUD -->
+  <section id="hud" class="screen">
+    <div class="hud-block hud-tl">
+      <small data-t="hud.score">Score</small>
+      <div class="hud-score" id="hud-score">0</div>
+      <div class="hud-combo" id="hud-combo">
+        <b id="hud-mult">x1</b>
+        <span id="hud-chain"></span>
+        <i class="combo-timer"><em id="hud-combo-bar"></em></i>
+      </div>
+    </div>
+
+    <div class="hud-block hud-tr">
+      <small data-t="hud.level">Level</small>
+      <div class="hud-sector" id="hud-sector">01 &middot; 1</div>
+      <div class="hud-sector-name" id="hud-sector-name">Sundown Basin</div>
+      <small class="mt" data-t="hud.best">Best</small>
+      <div class="hud-best" id="hud-best">0</div>
+    </div>
+
+    <div class="hud-block hud-bl">
+      <div class="meter">
+        <small data-t="hud.hull">Health</small>
+        <div class="bar hull"><em id="hud-hull"></em></div>
+        <span id="hud-hull-n">100</span>
+      </div>
+      <div class="meter">
+        <small data-t="hud.shield">Shield</small>
+        <div class="bar shield"><em id="hud-shield"></em></div>
+        <span id="hud-shield-n">0</span>
+      </div>
+    </div>
+
+    <div class="hud-block hud-br">
+      <div class="ability" id="hud-dash"><small data-t="hud.dash">Dash</small><i><em id="hud-dash-fill"></em></i></div>
+      <div class="ability"><small data-t="hud.emp">Bomb</small><span class="pips" id="hud-emp"></span></div>
+      <div class="ability od" id="hud-od"><small id="hud-od-label">Overdrive</small><i><em id="hud-od-fill"></em></i></div>
+      <div class="buffs" id="hud-buffs"></div>
+    </div>
+
+    <div class="boss-bar" id="boss-bar">
+      <span data-t="hud.boss">Boss</span>
+      <i><em id="boss-fill"></em></i>
+    </div>
+
+    <div class="banner" id="banner"><small id="banner-kicker"></small><strong id="banner-title"></strong></div>
+    <div class="toast" id="toast"></div>
+    <div class="hint" id="hint"></div>
+    <div class="demo-tag" id="demo-tag"><b>Demo</b><span data-t="demo.tag">Press any key to play</span></div>
+    <div class="fps" id="fps"></div>
+  </section>
+
+  <!-- PAUSE -->
+  <section id="pause" class="screen panel slim">
+    <div class="panel-box">
+      <header class="panel-head"><h2 data-t="pause.title">Paused</h2></header>
+      <nav class="menu-list compact" id="pause-list">
+        <button type="button" data-action="resume"><span class="lbl" data-t="pause.resume">Resume</span></button>
+        <button type="button" data-action="restart"><span class="lbl" data-t="pause.restart">Restart</span></button>
+        <button type="button" data-action="quit"><span class="lbl" data-t="pause.quit">Main Menu</span></button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- GAME OVER -->
+  <section id="gameover" class="screen panel">
+    <div class="panel-box">
+      <header class="panel-head"><h2 id="go-title">Game Over</h2></header>
+      <div class="go-score"><small data-t="go.final">Final score</small><b id="go-score">0</b><span id="go-best"></span></div>
+      <dl class="go-stats" id="go-stats"></dl>
+      <div class="medals"><small data-t="go.medals">Medals</small><div id="go-medals"></div></div>
+      <form class="go-entry" id="go-entry" hidden>
+        <label for="go-name" data-t="go.entry"></label>
+        <div><input id="go-name" maxlength="3" autocomplete="off" spellcheck="false"><button type="submit" data-t="go.save">Save</button></div>
+      </form>
+      <nav class="menu-list compact row" id="go-list">
+        <button type="button" data-action="restart"><span class="lbl" data-t="go.again">Play Again</span></button>
+        <button type="button" data-action="quit"><span class="lbl" data-t="go.menu">Main Menu</span></button>
+      </nav>
+    </div>
+  </section>
+
+  <div class="popups" id="popups"></div>
+  <div class="curtain" id="curtain"></div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>
